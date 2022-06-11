@@ -1,10 +1,12 @@
-import {Component} from 'react';
+import { Component } from 'react';
+
 import MarvelService from '../../services/MarvelService';
 import Spinner from '../spinner/Spinner';
 import ErrorMessage from '../errorMessage/ErrorMessage';
 import Skeleton from '../skeleton/Skeleton';
 
 import './charInfo.scss';
+
 class CharInfo extends Component {
 
     state = {
@@ -15,28 +17,28 @@ class CharInfo extends Component {
 
     marvelService = new MarvelService();
 
-    componentDidMount () {
+    componentDidMount() {
         this.updateChar();
     }
 
-    componentDidUpdate (prevProps) {
-        if(this.props.charId !== prevProps.charId) {
+    componentDidUpdate(prevProps){
+        if (this.props.charId !== prevProps.charId) {
             this.updateChar();
         }
     }
 
     updateChar = () => {
-        const {charId}  = this.props;
-        if(!charId) {
+        const {charId} = this.props;
+        if (!charId) {
             return;
-        } 
+        }
 
         this.onCharLoading();
 
         this.marvelService
             .getCharacter(charId)
             .then(this.onCharLoaded)
-            .catch(this.onError)
+            .catch(this.onError);
     }
 
     onCharLoaded = (char) => {
@@ -110,15 +112,15 @@ const View = ({char}) => {
                 {comics.length > 0 ? null : 'There is no comics with this character'}
                 {
                     comics.map((item, i) => {
-                        // eslint-disable-next-line array-callback-return
-                        if (i > 9) return;                        
+                        // eslint-disable-next-line
+                        if (i > 9) return;
                         return (
                             <li key={i} className="char__comics-item">
                                 {item.name}
                             </li>
                         )
                     })
-                }
+                }                
             </ul>
         </>
     )
