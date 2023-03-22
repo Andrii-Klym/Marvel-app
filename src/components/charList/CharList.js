@@ -93,7 +93,7 @@ const CharList = (props) => {
             </ul>
         )
     }
-           
+
     const items = renderItems(charList);
 
     const errorMessage = error ? <ErrorMessage/> : null;
